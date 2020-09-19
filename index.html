@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id='start-screen' class='screen'>
+        <header class="flex-v">
+            <div class="space flex-v">
+                <h1>QUIZ GAME</h1>
+            </div>
+        </header>
+        <div class="content flex-v">
+            <div class="space flex-v">
+                <button class="new-game">NEW GAME</button>
+                <button class="highscore">HIGHSCORE</button>
+                <button class="config">CONFIG</button>
+            </div>
+        </div>
+        <footer class="flex-v">
+            <div class="space flex-v">
+                Made by Meiting, 2020
+            </div>
+        </footer>
+    </div>
+
+    <div id='quiz-screen' class='screen'>
+        <header class="flex-v">
+            <div class="space flex-v">
+                <h1 id='quiz_header'>QUIZ</h1>
+            </div>
+        </header>
+        <div class="content flex-v">
+            <div class="space flex-v" id='quiz_content'>
+            </div>
+        </div>
+        <footer class="flex-v">
+            <div class="space flex-v">
+                Made by Meiting, 2020
+            </div>
+        </footer>
+    </div>
+
+    <div id='highscore-screen' class='screen'>
+        <header class="flex-v">
+            <div class="space flex-v">
+                <h1>HIGH SCORE</h1>
+            </div>
+        </header>
+        <div class="content flex-v">
+            <div class="space flex-v">
+                <div id="hs0"></div>
+                <div id="hs1"></div>
+                <div id="hs2"></div>
+                <div id="hs3"></div>
+                <div id="hs4"></div>
+                <div id="hs5"></div>
+                <div id="hs6"></div>
+                <div id="hs7"></div>
+                <button class="highscore back">BACK</button>
+            </div>
+        </div>
+        <footer class="flex-v">
+            <div class="space flex-v">
+                Made by Meiting, 2020
+            </div>
+        </footer>
+    </div>
+
+    <div id='score-screen' class='screen'>
+        <header class="flex-v">
+            <div class="space flex-v">
+                <h1>FINAL SCORE</h1>
+            </div>
+        </header>
+        <div class="content flex-v">
+            <div class="space flex-v">
+                <h2 id="final_score"></h2>
+                <div class="flex-h">
+                    <label for="name">Your name:</label>
+                    <input name="name" id="final_score_name" />
+                </div>
+                <button onclick="saveScore()">SAVE</button>
+            </div>
+        </div>
+        <footer class="flex-v">
+            <div class="space flex-v">
+                Made by Meiting, 2020
+            </div>
+        </footer>
+    </div>
+
+    <div id='config-screen' class='screen'>
+        <header class="flex-v">
+            <div class="space flex-v">
+                <h1>CONFIG</h1>
+            </div>
+        </header>
+        <div class="content flex-v">
+            <div class="space flex-v">
+                <div class="flex-h">
+                    <label for="difficulty">DIFFICULTY</label>
+                    <select name="difficulty">
+                        <option value="esay">EASY</option>
+                        <option value="medium">MEDIUM</option>
+                        <option value="hard">HARD</option>
+                    </select>
+                </div>
+                <div class="flex-h">
+                    <label for="category">CATEGORY</label>
+                    <select name="category">
+                        <option value="Linux">Linux</option>
+                        <option value="Networking">Networking</option>
+                        <option value="PHP">PHP</option>
+                        <option value="JS">JS</option>
+                        <option value="Pythong">Pythong</option>
+                        <option value="Cloud">Cloud</option>
+                        <option value="Docker">Docker</option>
+                    </select>
+                </div>
+                <div class="flex-h">
+                    <label for="tags">TAGS</label>
+                    <input name="tags" />
+                </div>
+                <div class="flex-h">
+                    <button class="save _config">SAVE</button>
+                    <button class="back _config">BACK WHITOUT SAVE</button>
+                </div>
+            </div>
+        </div>
+        <footer class="flex-v">
+            <div class="space flex-v">
+                Made by Meiting, 2020
+            </div>
+        </footer>
+    </div>
+
+    <style>
+        * {
+            font-family: 'Ranchers', cursive;
+            letter-spacing: 0.2rem;
+        }
+
+        body,
+        div {
+            margin: 0;
+            padding: 0;
+            color: #222;
+        }
+
+        body {
+            background-color: #ecf0f3;
+        }
+
+        .screen {
+            width: 100vw;
+            /* vw = view width */
+            height: 100vh;
+            /* vw = view hight */
+            position: absolute;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            opacity: 0;
+            display: flex;
+            transition: all 1s;
+        }
+
+        .flex-v {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .flex-h {
+            width: 70%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header {
+            flex: 1;
+            width: 70vw;
+        }
+
+        div.content {
+            flex: 4;
+            width: 60vw;
+        }
+
+        footer {
+            flex: 1;
+            width: 70vw;
+            color: #666;
+        }
+
+        .space {
+            box-sizing: border-box;
+            width: 90%;
+            height: 90%;
+            border-radius: 20px;
+            box-shadow: inset 18px 18px 30px #d1d9e6, inset -18px -18px 30px #fff;
+            transition: all 1s;
+        }
+
+        .space:hover {
+            box-shadow: inset 8px 8px 10px #d1d9e6, inset -8px -8px 10px #fff;
+        }
+
+        button {
+            width: 25vw;
+            padding: 1vw;
+            margin: 0;
+            border: 0;
+            outline: none;
+            border-radius: 15px;
+            box-shadow: 18px 18px 20px #d1d9e6, -18px -18px 20px #fff;
+            background: inherit;
+            transition: all 300ms;
+            color: #444;
+        }
+
+        button:hover {
+            border-radius: 15px;
+            box-shadow: 8px 8px 15px #d1d9e6, -8px -8px 15px #fff;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function setScreen(name) {
+            const screens = $('.screen')
+            screens.css({
+                opacity: 0,
+                zIndex: 0
+            })
+            let screen = $(`#${name}-screen`)
+            if (!screen) {
+                throw new ReferenceError('invalid parameter for screen name')
+            }
+            screen.css({
+                opacity: 1,
+                zIndex: 100
+            })
+        }
+
+        function newGame() {
+            data.currentScore = 0
+            data.quizCount = 0
+            setScreen('quiz')
+            quiz()
+        }
+
+        let data = {
+            difficulty: 'easy',
+            category: 'Linux',
+            tags: '',
+            highscore: [
+            ],
+            currentScore: 0,
+            quizTotal: 10,
+            quizCount: 0
+        }
+
+        function encodeHtmlString(rawStr) {
+            return rawStr.replace(/[\u00A0-\u9999<>\&]/gim, function (i) {
+                return '&#' + i.charCodeAt(0) + ';'
+            })
+        }
+
+        function saveScore() {
+            const name = $('#final_score_name').val()
+            data.highscore.push(
+                [name, data.currentScore]
+            )
+            setScreen('start')
+            saveData()
+        }
+
+        async function quiz() {
+            data.quizCount++
+            $('#quiz_header').empty()
+            $('#quiz_content').empty()
+            if (data.quizCount >= data.quizTotal + 1) {
+                setScreen('score')
+                $('#final_score').text(String(data.currentScore))
+                return
+            }
+
+            const q = (await getQuiz())[0]
+            $('#quiz_header').text(`QUIZ ${data.quizCount}/${data.quizTotal}`)
+            $('#quiz_content').append($(`
+                <h2 style="width: 80%;">${encodeHtmlString(q.question)}</h2 >
+            ${q.answers.map((a, i) => {
+                return `<button onclick="${i === q.correct ? 'quizRight();' : 'quizFalse();'
+                    }">${encodeHtmlString(a)}</button>`
+            }).join('')
+                }
+        `))
+        }
+
+        function quizRight() {
+            data.currentScore += 10
+            quiz()
+        }
+
+        function quizFalse() {
+            data.currentScore -= 5
+            quiz()
+        }
+
+        function highscore() {
+            let i = 0
+            const highscore = data.highscore.sort((a, b) => {
+                const r = b[1] - a[1]
+                if (r === 0) {
+                    return a[0].localeCompare(b[0])
+                }
+                return r
+            })
+            while (i < 8) {
+                if (highscore[i] === undefined) break
+                const [name, score] = highscore[i]
+                $('#hs' + i).text(
+                    `${score}${name ? `(${name})` : ''}`
+                )
+                i++
+            }
+            setScreen('highscore')
+        }
+
+        function config() {
+            $('select[name=difficulty] option').attr('selected', false)
+            $(`select[name = difficulty] option[value = ${data.difficulty}]`)
+                .attr('selected', true)
+            $('select[name=category] option').attr('selected', false)
+            $(`select[name = category] option[value = ${data.category}]`)
+                .attr('selected', true)
+            $('input[name=tags]').val(data.tags)
+            setScreen('config')
+        }
+
+        function saveConfig() {
+            data.difficulty = $('select[name=difficulty]').val()
+            data.category = $('select[name=category]').val()
+            data.tags = $('input[name=tags]').val()
+            setScreen('start')
+        }
+
+        function saveData() {
+            localStorage.setItem('data', JSON.stringify(data))
+        }
+
+        function loadData() {
+            try {
+                const str = localStorage.getItem('data')
+                if (str !== null && typeof str === 'string') {
+                    const json = JSON.parse(str)
+                    const keys = Object.keys(json)
+                    for (key of keys) {
+                        if (
+                            data[key] !== undefined &&
+                            json[key] !== undefined
+                        ) {
+                            data[key] = json[key]
+                        }
+                    }
+                }
+            } catch (e) { }
+        }
+
+        function backToStart() {
+            $('select[name=difficulty] option').attr('selected', false)
+            $(`select[name = difficulty] option[value = ${data.difficulty}]`)
+                .attr('selected', true)
+            $('select[name=category] option').attr('selected', false)
+            $(`select[name = category] option[value = ${data.category}]`)
+                .attr('selected', true)
+            $('input[name=tags]').val(data.tags)
+            setScreen('start')
+        }
+
+        const apiKey = "Dp8Oo289Dj4ECeR2KKgODu0ltToquaLteSeeT31M"
+        const apiUrl = "https://quizapi.io/api/v1/questions"
+
+        // `string ${ variable } with other string`
+        // 'string ' + variable + ' with other string'
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/template_strings
+
+        async function getQuiz(limit, difficulty, category, tags) {
+            const url = apiUrl + '?' +
+                `apiKey=${apiKey}& ` +
+                `limit=${limit ?? 1}& ` +
+                `difficulty=${difficulty ?? 'easy'}& ` +
+                `category=${category ?? ''}& ` +
+                `tags=${tags ?? ''}`
+            const response = await fetch(url)
+            let json = await response.json()
+
+            if (json.multiple_correct_answers === 'true')
+                return await getQuiz(limit, difficulty, category, tags)
+
+            // format data
+            json = json.map((i) => {
+                const keys = Object.keys(i.answers)
+                return {
+                    question: i.question,
+                    answers: keys.map(_ => i.answers[_]).filter(_ => _ !== null),
+                    correct: keys.indexOf(i.correct_answer)
+                }
+            })
+            return json
+        }
+
+        $(() => {
+            loadData()
+            $('button.new-game').on('click', newGame)
+            $('button.highscore').on('click', highscore)
+            $('button.config').on('click', config)
+            $('button.save._config').on('click', saveConfig)
+            $('button.back._config').on('click', backToStart)
+            $('button.back.highscore').on('click', _ => setScreen('start'))
+
+            setScreen('start')
+        })
+    </script>
+</body>
+
+</html>
